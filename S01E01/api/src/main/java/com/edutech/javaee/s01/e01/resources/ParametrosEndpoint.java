@@ -20,7 +20,6 @@ import javax.ws.rs.core.Response;
 public class ParametrosEndpoint {
     
     @GET
-    @Path("/")
     @Produces({"application/json"})
     public List<ParametroDto> findAll() {
         List<ParametroDto> parametros = new ArrayList<>();
@@ -41,13 +40,6 @@ public class ParametrosEndpoint {
         parametros.add( new ParametroDto(3L, "# Decimales", "2"));
         parametros.add( new ParametroDto(4L, "Otro parametro", "10"));
         
-        /*ParametroDto parametro = null;
-        for (ParametroDto item: parametros) {
-            if (item.getId().equals(id)) {
-                parametro = item;
-                break;
-            }
-        }*/
         List<ParametroDto> results = parametros.stream()
                 .filter(item -> item.getId().equals(id))
                 .collect(Collectors.toList());        

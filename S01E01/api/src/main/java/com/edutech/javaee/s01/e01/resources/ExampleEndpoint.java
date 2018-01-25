@@ -20,9 +20,9 @@ public class ExampleEndpoint {
     
     @GET
     @Path("string-list")
-    //@Produces({"application/json"})
+    @Produces({"application/json"})
     public Response getNamesAsString() {
-        String names[] = { "Java", "Scala", "Kotlins" };
+        String names[] = { "Java", "Scala", "Kotlin" };
         return Response.ok( Arrays.asList(names) ).build();
     }
     
