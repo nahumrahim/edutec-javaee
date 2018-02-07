@@ -52,6 +52,7 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
         this.password = null;
         this.telefono = telefono;
+        this.rol = rol;
     }
     
     public Integer getId() {

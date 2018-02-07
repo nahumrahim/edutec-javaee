@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.RollbackException;
 import javax.ws.rs.Consumes;
@@ -33,18 +34,32 @@ public class UsuarioEndpoint {
     @PersistenceContext(unitName = "primary")
     EntityManager em;
 
+    private Usuario buscarUsuario(Integer id) {
+        try {
+            return this.em
+                    .createQuery("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.id = :parametro", Usuario.class)
+                    .setParameter("parametro", id)
+                    .getSingleResult();
+        } catch(NoResultException nre) {
+            return null;
+        }
+    }
+    
     @GET
     @Produces({"application/json"})
     public List<Usuario> findAll() {
-        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u JOIN FETCH u.rol", Usuario.class)
+        List<Usuario> usuarios = this.em
+                .createQuery("SELECT u FROM Usuario u JOIN FETCH u.rol", Usuario.class)
                 .getResultList();        
         return usuarios;
     }
 
     @GET
     @Path("{id}")
-    public Response findById(@PathParam("id") Long id) {
-        Usuario usuario = this.em.find(Usuario.class, id);
+    @Produces({"application/json"})
+    public Response findById(@PathParam("id") Integer id) {
+        //Usuario usuario = this.em.find(Usuario.class, id);        
+        Usuario usuario = this.buscarUsuario(id);
         
         if (usuario == null)
             return Response
@@ -72,10 +87,18 @@ public class UsuarioEndpoint {
     }
 
     @PUT
-    @Path("{id}")
     @Produces({"application/json"})
     public Response update(UsuarioDto dto) throws RollbackException {
-        Usuario usuario = em.find(Usuario.class, dto.getId());
+        //Usuario usuario = em.find(Usuario.class, dto.getId());
+        Usuario usuario = this.buscarUsuario(dto.getId());
+
+        if (usuario == null)
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .type(MediaType.TEXT_HTML)
+                    .entity("Recurso no encontrado")                    
+                    .build();
+        
         usuario.setCodigo(dto.getCodigo());
         usuario.setEmail(dto.getEmail());
         usuario.setNombre(dto.getNombre());
@@ -88,8 +111,8 @@ public class UsuarioEndpoint {
     @DELETE
     @Path("{id}")
     @Produces({"application/json"})
-    public Response delete(@PathParam("id") Long id) {
-        Usuario usuario = em.find(Usuario.class, id);
+    public Response delete(@PathParam("id") Integer id) {
+        Usuario usuario = this.buscarUsuario(id);
 
         if (usuario == null)
             return Response

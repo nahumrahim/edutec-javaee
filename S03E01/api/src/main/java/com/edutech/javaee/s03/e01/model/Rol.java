@@ -1,6 +1,7 @@
 package com.edutech.javaee.s03.e01.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rolGen")
     @SequenceGenerator(name="rolGen", sequenceName = "rol_seq", initialValue = 10)
+    @Column(name="ID")
     private Integer id;
     
     private String nombre;
