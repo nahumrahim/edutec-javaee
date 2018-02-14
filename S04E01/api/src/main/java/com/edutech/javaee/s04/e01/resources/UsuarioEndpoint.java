@@ -1,5 +1,6 @@
 package com.edutech.javaee.s04.e01.resources;
 
+import com.edutech.javaee.s04.e01.dao.DepartamentoDao;
 import com.edutech.javaee.s04.e01.dao.RolDao;
 import com.edutech.javaee.s04.e01.dao.UsuarioDao;
 import com.edutech.javaee.s04.e01.dto.ErrorMessageDto;
@@ -28,7 +29,7 @@ import javax.ws.rs.core.Response;
 @Path("/usuarios")
 public class UsuarioEndpoint {
 
-    //@EJB
+    //@Inject
     final UsuarioDao usuarioDao;
 
     //@Inject

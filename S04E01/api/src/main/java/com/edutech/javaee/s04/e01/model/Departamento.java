@@ -22,8 +22,8 @@ import javax.persistence.Table;
 @Table(name="DEPARTAMENTO")
 @NamedQueries({
     // Distinct
-    //@NamedQuery(name="Departamento.findAll", query="Select d from Departamento d JOIN FETCH d.municipios")
-    @NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),
+    @NamedQuery(name="Departamento.findAll", query="Select DISTINCT d from Departamento d LEFT JOIN FETCH d.municipios"),
+    //@NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),
     //JOIN FETCH
     @NamedQuery(name="Departamento.findById", query="Select d from Departamento d LEFT JOIN FETCH d.municipios WHERE d.id = :idDepartamento")
 })

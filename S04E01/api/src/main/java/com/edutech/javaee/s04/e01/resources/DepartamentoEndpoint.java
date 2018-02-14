@@ -43,7 +43,7 @@ public class DepartamentoEndpoint {
         List<Departamento> deptosDto;
         deptosDto = new ArrayList<>();
         
-        this.dao.findAll()
+        /*this.dao.findAll()
                 .stream()
                 .forEach((departamento) -> deptosDto.add(
                     new Departamento (
@@ -52,8 +52,8 @@ public class DepartamentoEndpoint {
                         departamento.getNombre()
                     )
                 ));
-                
-        return deptosDto;
+          */      
+        return this.dao.findAll();
     }
 
 }

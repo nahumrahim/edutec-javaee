@@ -69,7 +69,7 @@ export class EditUsuarioComponent extends AbstractDialogContent<IUsuario, Usuari
         });
     }
     
-    protected save() {
+    public save() {
         let clonedEntity = Object.assign({}, this.entity)
         console.dir (clonedEntity)
         clonedEntity.idRol = this.entity.rol.id

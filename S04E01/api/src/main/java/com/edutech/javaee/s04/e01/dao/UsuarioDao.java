@@ -12,12 +12,19 @@ import javax.persistence.PersistenceContext;
  *
  * @author nahum
  */
-@Stateless
+//@Stateless
 public class UsuarioDao {
 
     @PersistenceContext(unitName = "primary")
     EntityManager em;
 
+    public UsuarioDao() {
+    }
+
+    public UsuarioDao(EntityManager em) {
+        this.em = em;
+    }
+    
     public Usuario find(Integer id) {
         try {
             return this.em
