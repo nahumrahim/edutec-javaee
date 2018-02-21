@@ -3,7 +3,6 @@ package com.edutech.javaee.s04.e01.dao;
 import com.edutech.javaee.s04.e01.dto.UsuarioDto;
 import com.edutech.javaee.s04.e01.model.Usuario;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;

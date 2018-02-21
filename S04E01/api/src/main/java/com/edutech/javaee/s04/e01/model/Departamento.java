@@ -18,14 +18,16 @@ import javax.persistence.Table;
  *
  * @author nahum
  */
-@Entity
+    @Entity
 @Table(name="DEPARTAMENTO")
 @NamedQueries({
     // Distinct
-    @NamedQuery(name="Departamento.findAll", query="Select DISTINCT d from Departamento d LEFT JOIN FETCH d.municipios"),
-    //@NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),
+    //@NamedQuery(name="Departamento.findAll", query="Select DISTINCT d from Departamento d LEFT JOIN FETCH d.municipios"),
+    @NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),
     //JOIN FETCH
-    @NamedQuery(name="Departamento.findById", query="Select d from Departamento d LEFT JOIN FETCH d.municipios WHERE d.id = :idDepartamento")
+    @NamedQuery(name="Departamento.findById", query="Select d from Departamento d LEFT JOIN FETCH d.municipios WHERE d.id = :idDepartamento"),
+
+    @NamedQuery(name="Departamento.findByName", query="Select count(d) from Departamento d WHERE d.nombre = :nombre")
 })
 public class Departamento implements Serializable {
     
@@ -37,7 +39,7 @@ public class Departamento implements Serializable {
     private String codigo;
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY, orphanRemoval = true)
     List<Municipio> municipios;
     
     public Departamento() {

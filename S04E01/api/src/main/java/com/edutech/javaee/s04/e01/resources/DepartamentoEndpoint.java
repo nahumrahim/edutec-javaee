@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.transaction.RollbackException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -43,7 +47,7 @@ public class DepartamentoEndpoint {
         List<Departamento> deptosDto;
         deptosDto = new ArrayList<>();
         
-        /*this.dao.findAll()
+        this.dao.findAll()
                 .stream()
                 .forEach((departamento) -> deptosDto.add(
                     new Departamento (
@@ -52,8 +56,32 @@ public class DepartamentoEndpoint {
                         departamento.getNombre()
                     )
                 ));
-          */      
-        return this.dao.findAll();
+        return deptosDto;
     }
 
+    @POST
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Response create(Departamento depto) {
+        if (this.dao.save(depto) == null)
+            return Response.status(Response.Status.CONFLICT)
+                    .entity(new ErrorMessageDto(false, 409, "Hubo un error al intentar guardar el registro"))
+                    .build();
+        
+        return Response.ok(depto).build();
+    }
+
+    @PUT
+    @Produces({"application/json"})
+    public Response update(Departamento depto) throws RollbackException {
+        depto = this.dao.edit(depto);
+        if (depto == null)
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorMessageDto(false, 404, "Recurso no encontrado"))
+                    .build();
+        
+        return Response.ok(depto).build();
+    }
+    
 }
