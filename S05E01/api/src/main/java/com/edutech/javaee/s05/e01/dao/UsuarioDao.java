@@ -45,7 +45,7 @@ public class UsuarioDao {
         return entity;
     }
     
-    public Usuario edit(UsuarioDto entity) {
+    public Usuario edit(Usuario entity) {
         Usuario usuario = this.find(entity.getId());
         if (usuario != null) {
             usuario.setCodigo(entity.getCodigo());

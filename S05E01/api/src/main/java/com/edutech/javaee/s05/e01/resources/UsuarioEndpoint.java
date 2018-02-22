@@ -80,13 +80,13 @@ public class UsuarioEndpoint {
     @POST
     @Consumes({"application/json"})
     @Produces({"application/json"})
-    public Response create(UsuarioDto dto) {
+    public Response create(Usuario entity) {
         Usuario usuario = new Usuario(
-                dto.getCodigo(), 
-                dto.getEmail(), 
-                dto.getNombre(), 
-                dto.getTelefono(),
-                this.rolDao.find(dto.getIdRol())
+                entity.getCodigo(), 
+                entity.getEmail(), 
+                entity.getNombre(), 
+                entity.getTelefono(),
+                this.rolDao.find(entity.getRol().getId())
             );
         this.usuarioDao.save(usuario);
         return Response.ok(usuario).build();
@@ -94,8 +94,8 @@ public class UsuarioEndpoint {
 
     @PUT
     @Produces({"application/json"})
-    public Response update(UsuarioDto dto) throws RollbackException {
-        Usuario usuario = this.usuarioDao.edit(dto);
+    public Response update(Usuario entity) throws RollbackException {
+        Usuario usuario = this.usuarioDao.edit(entity);
         if (usuario == null)
             return Response
                     .status(Response.Status.NOT_FOUND)

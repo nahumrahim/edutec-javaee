@@ -23,6 +23,16 @@ export class EditUsuarioComponent {
  		private router: Router) {}
 
     ngOnInit() {
+    	this.entity = {
+    		 nombre: "",
+    		 email: "",
+    		 id: null,
+    		 rol: {
+    		 	id: null,
+    		 	nombre: "",
+    		 	descripcion: ""
+    		 }
+    	}
 		this.sub = this.route.params.subscribe(params => {
 	       	this.id = +params['id'];
 			if (this.id && this.id != null) {
@@ -51,22 +61,42 @@ export class EditUsuarioComponent {
 					}, (err) => {
 						this.busy = false;
 					});
+			} else {
+				this.rolService
+					.getEntities()
+					.subscribe((response) => {
+						this.roles = response;
+						this.busy = false;
+					}, (err) => {
+						this.busy = false;
+					});
 			}
 	    });
     }
 
 	save() {
 		this.busy = true;
-		this.usuarioService.update(this.entity).subscribe((response) => {
+		if (this.entity.id && this.entity.id != null) {
+			this.usuarioService.update(this.entity).subscribe((response) => {
 				this.busy = false;
 				this.entity = response;
 			}, (err) => {
 				this.busy = false;
 			});
-		this.router.navigate(['/admin/seguridad/usuarios']);
+		}
+		else {
+			this.usuarioService.save(this.entity).subscribe((response) => {
+					this.busy = false;
+					this.entity = response;
+				}, (err) => {
+					this.busy = false;
+				});			
+		}
+
+		this.router.navigate(['/admin/usuarios']);
 	}
 	cancel() {
-		this.router.navigate(['/admin/seguridad/usuarios']);
+		this.router.navigate(['/admin/usuarios']);
 	}
 
     private handleError (error: any) {
@@ -77,5 +107,6 @@ export class EditUsuarioComponent {
         console.error(errMsg); // log to console instead
         return Observable.throw(errMsg);
     }
+
 
 }

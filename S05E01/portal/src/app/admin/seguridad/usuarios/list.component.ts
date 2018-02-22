@@ -24,7 +24,12 @@ export class ListUsuariosComponent {
 			});
 	}
 
-	eliminar(usuario: IUsuario) {
-
-	}
+    eliminar(entity: IUsuario) {
+		this.busy = true;
+		this.usuarioService.delete(entity.id).subscribe((response) => {
+			this.busy = false;
+		}, (err) => {
+			this.busy = false;
+		});    	
+    }
 }

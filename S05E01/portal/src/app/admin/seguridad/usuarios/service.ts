@@ -35,7 +35,27 @@ export class UsuarioService {
 	}
 
 	update(usuario: IUsuario): Observable<IUsuario> {
-		return this.http.put(this.endpointUrl + "/" + usuario.id, usuario)
+		return this.http.put(this.endpointUrl + "/", usuario)
+		.map((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return Observable.throw(error.statusText);
+		});
+	}
+	
+	save(usuario: IUsuario): Observable<IUsuario> {
+		return this.http.post(this.endpointUrl + "/", usuario)
+		.map((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return Observable.throw(error.statusText);
+		});
+	}
+
+	delete(idUsuario: Number): Observable<IUsuario> {
+		return this.http.delete(this.endpointUrl + "/" + idUsuario, usuario)
 		.map((response) => {
 			return response;
 		})

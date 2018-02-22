@@ -37,6 +37,14 @@ const appRoutes: Routes = [
         }
     },
     {
+        path: 'admin/usuarios/agregar',
+        component: EditUsuarioComponent,
+        data: { 
+            "uk": "usuarios",
+            "caption": "Usuarios"
+        }
+    },
+    {
         path: 'admin/usuarios/edit/:id',
         component: EditUsuarioComponent,
         data: { 
