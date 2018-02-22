@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IUsuario } from './interface';
 import { UsuarioService } from './service';
-import { DatePipe } from '@angular/common';
+import { ModalDialogService } from '../../../shared/dialog/service';
 
 @Component({
   templateUrl: './list.component.html',
@@ -11,11 +11,12 @@ export class ListUsuariosComponent {
 	usuarios: IUsuario[];
 	busy = false;
 
-    constructor(private usuarioService: UsuarioService) {}
+    constructor(private service: UsuarioService,
+        private dialogService: ModalDialogService ) {}
 
     ngOnInit() {
     	this.busy = true;
-		this.usuarioService.getUsuarios().subscribe((response) => {
+		this.service.getUsuarios().subscribe((response) => {
 				this.busy = false;
 				this.usuarios = response;
 			}, (err) => {
@@ -25,11 +26,23 @@ export class ListUsuariosComponent {
 	}
 
     eliminar(entity: IUsuario) {
-		this.busy = true;
-		this.usuarioService.delete(entity.id).subscribe((response) => {
-			this.busy = false;
-		}, (err) => {
-			this.busy = false;
-		});    	
+        this.dialogService.confirm({
+            title:"Confirmación",
+            message: 'Ésta operación es irreversible. Está Seguro?',
+            yesCallback: ()=>{
+                this.busy = true
+                this.service.delete(entity.id).subscribe((response)=>{
+                    this.busy = false
+                    this.ngOnInit()
+                }, (err) => {           
+                    this.busy = false
+                })
+            },
+            noCallback: ()=>{
+                // Do nothing
+                console.dir ("No quiso :(")
+            }
+        })
+
     }
 }

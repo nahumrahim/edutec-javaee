@@ -55,7 +55,7 @@ export class UsuarioService {
 	}
 
 	delete(idUsuario: Number): Observable<IUsuario> {
-		return this.http.delete(this.endpointUrl + "/" + idUsuario, usuario)
+		return this.http.delete(this.endpointUrl + "/" + idUsuario)
 		.map((response) => {
 			return response;
 		})
