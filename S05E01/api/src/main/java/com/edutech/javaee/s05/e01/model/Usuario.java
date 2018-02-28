@@ -1,6 +1,8 @@
 package com.edutech.javaee.s05.e01.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -26,11 +31,18 @@ public class Usuario implements Serializable {
     
     private String codigo;
     private String email;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;    
+    
     private String mimeType;
     private String nombre;
     private String nombreArchivo;
     private String password;
     private String telefono;
+    
+    @Transient
+    private String fechaNacimientoConFormato;
 
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -49,13 +61,16 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String codigo, String email, String nombre, String telefono, Rol rol) {
+    public Usuario(String codigo, String email, String nombre, String telefono, Rol rol, Date fechaNacimiento) {
         this.codigo = codigo;
         this.email = email;
         this.nombre = nombre;
         this.password = null;
         this.telefono = telefono;
         this.rol = rol;
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        this.fechaNacimientoConFormato = df.format(fechaNacimiento);
+        System.out.println( this.fechaNacimientoConFormato );
     }
     
     public Integer getId() {
@@ -130,5 +145,20 @@ public class Usuario implements Serializable {
         this.nombreArchivo = nombreArchivo;
     }
 
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }    
+
+    public String getFechaNacimientoConFormato() {
+        return fechaNacimientoConFormato;
+    }
+
+    public void setFechaNacimientoConFormato(String fechaNacimientoConFormato) {
+        this.fechaNacimientoConFormato = fechaNacimientoConFormato;
+    }
     
 }

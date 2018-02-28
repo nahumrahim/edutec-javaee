@@ -15,8 +15,7 @@ import java.lang.annotation.Annotation;
  * @author nahum
  */
 
-@Provider
-@CacheControl
+//@Provider
 public class CacheControlFilter implements ContainerResponseFilter {
 
     @Override
@@ -24,6 +23,7 @@ public class CacheControlFilter implements ContainerResponseFilter {
             throws IOException {
         
         for (Annotation a : pResponseContext.getEntityAnnotations()) {
+            System.out.println(a.annotationType());
             if (a.annotationType() == CacheControl.class) {
                 String value = ((CacheControl) a).value();
                 pResponseContext.getHeaders().putSingle(HttpHeaders.CACHE_CONTROL, value);
