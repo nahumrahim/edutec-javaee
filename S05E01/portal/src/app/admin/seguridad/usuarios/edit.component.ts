@@ -28,11 +28,12 @@ export class EditUsuarioComponent {
     		 email: "",
     		 telefono: "",
     		 id: null,
+             telefono: "0",
     		 rol: {
     		 	id: null,
     		 	nombre: "",
     		 	descripcion: ""
-    		 }
+             }
     	}
 		this.sub = this.route.params.subscribe(params => {
 	       	this.id = +params['id'];
