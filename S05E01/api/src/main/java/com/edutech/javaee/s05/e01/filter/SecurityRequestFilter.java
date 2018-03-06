@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.Response.status;
 
@@ -17,7 +19,7 @@ import static javax.ws.rs.core.Response.status;
  * @author nahum
  */
 @Provider
-public class SecurityRequestFilter implements ContainerRequestFilter {
+public class SecurityRequestFilter implements ContainerRequestFilter, ContainerResponseFilter {
     
     @PersistenceContext(unitName = "primary")
     EntityManager em;
@@ -55,6 +57,11 @@ public class SecurityRequestFilter implements ContainerRequestFilter {
                     requestContext.getUriInfo().getPath()
                 ))
                 .build());*/  
+    }
+
+    @Override
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+        // Do nothing
     }
 
 }

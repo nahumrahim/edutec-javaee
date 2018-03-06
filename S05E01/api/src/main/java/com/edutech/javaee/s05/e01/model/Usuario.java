@@ -1,4 +1,4 @@
-package com.edutech.javaee.s05.e01.model;
+ package com.edutech.javaee.s05.e01.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,23 +33,18 @@ public class Usuario implements Serializable {
     
     private String codigo;
     private String email;
-    
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;    
-    
+    @Temporal(TemporalType.DATE) private Date fechaNacimiento;
     private String mimeType;
     private String nombre;
     private String nombreArchivo;
     private String password;
+    @Lob private byte[] pic;
     private String telefono;
-    
-    @Transient
-    private String fechaNacimientoConFormato;
+    @Transient private String fechaNacimientoConFormato;
 
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Rol rol;
-
 
     public Usuario(Integer id, String codigo, String nombre, String telefono, String email) {
         this.id = id;
@@ -160,5 +157,15 @@ public class Usuario implements Serializable {
     public void setFechaNacimientoConFormato(String fechaNacimientoConFormato) {
         this.fechaNacimientoConFormato = fechaNacimientoConFormato;
     }
+
+    @XmlTransient
+    public byte[] getPic() {
+        return pic;
+    }
+
+    public void setPic(byte[] pic) {
+        this.pic = pic;
+    }
+
     
 }

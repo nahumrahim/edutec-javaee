@@ -5,6 +5,7 @@ import com.edutech.javaee.s05.e01.dao.RolDao;
 import com.edutech.javaee.s05.e01.dao.UsuarioDao;
 import com.edutech.javaee.s05.e01.dto.ErrorMessageDto;
 import com.edutech.javaee.s05.e01.model.Usuario;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,6 +57,19 @@ public class UsuarioEndpoint {
     public UsuarioEndpoint(UsuarioDao usuarioDao, RolDao rolDao) {
         this.usuarioDao = usuarioDao;
         this.rolDao = rolDao;
+    }
+
+    public static byte[] readFully(InputStream is, int length, boolean readAll)
+            throws IOException {
+        byte[] output = {};
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[16384];
+        while ((nRead = is.read(data, 0, data.length)) != -1) {
+          buffer.write(data, 0, nRead);
+        }
+        buffer.flush();
+        return buffer.toByteArray();        
     }
 
     // save uploaded file to new location
@@ -163,7 +177,7 @@ public class UsuarioEndpoint {
     
         File file = new File(FILE_PATH + usuario.getNombreArchivo());
         Response.ResponseBuilder rb = Response.ok( file );
-        //rb.type(usuario.getMimeType());
+        rb.type(usuario.getMimeType());
         rb.header("Content-disposition", "inline; filename=" + usuario.getNombreArchivo());
         return rb.build();
     }
@@ -187,6 +201,7 @@ public class UsuarioEndpoint {
                     usuario.setNombreArchivo(item.getName());
                     usuario.setMimeType(item.getContentType());
                     this.writeToFile(item.openStream(), FILE_PATH + item.getName());
+                    usuario.setPic(readFully(item.openStream(), 1000000, true));
                 }
 			}
             this.usuarioDao.edit(usuario);
