@@ -90,7 +90,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Produces({"application/json"})
+    @Produces({"application/json" /*, "application/xml"*/})
     public List<Usuario> findAll() {
         return this.usuarioDao.findAll();
     }

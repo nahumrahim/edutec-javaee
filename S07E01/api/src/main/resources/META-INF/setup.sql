@@ -12,6 +12,7 @@ insert into usuario values(6, 'btorres', 'bernyt0rr3s@gmail.com', '1900-01-01', 
 
 insert into PARAMETRO_SISTEMA VALUES (1, 'MODO_DEBUG', '0')
 insert into PARAMETRO_SISTEMA VALUES (2, 'NUMERO_DECIMALES', '2')
+insert into PARAMETRO_SISTEMA VALUES (3, 'BANGUAT_TIPOCAMBIO_WSDL', 'https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx?WSDL')
 
 insert into DEPARTAMENTO values (1, 'GUA', 'Guatemala')
 insert into DEPARTAMENTO values (2, 'SAC', 'Sacatepéquez')

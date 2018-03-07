@@ -401,10 +401,10 @@
   <wsdl:service name="TipoCambio">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Tipo de cambio en moneda extranjera</wsdl:documentation>
     <wsdl:port name="TipoCambioSoap" binding="tns:TipoCambioSoap">
-      <soap:address location="https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx" />
+      <soap:address location="http://www.banguat.gob.gt/variables/ws/TipoCambio.asmx" />
     </wsdl:port>
     <wsdl:port name="TipoCambioSoap12" binding="tns:TipoCambioSoap12">
-      <soap12:address location="https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx" />
+      <soap12:address location="http://www.banguat.gob.gt/variables/ws/TipoCambio.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
