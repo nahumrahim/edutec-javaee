@@ -182,8 +182,12 @@ public class UsuarioEndpoint {
                     .build();
         }
 
-        File file = new File(FILE_PATH + usuario.getNombreArchivo());
-        Response.ResponseBuilder rb = Response.ok(file);
+        // Con sistema de archivos
+        //File file = new File(FILE_PATH + usuario.getNombreArchivo());
+        //Response.ResponseBuilder rb = Response.ok( file);
+        
+        // Con base de datos
+        Response.ResponseBuilder rb = Response.ok( usuario.getPic() );
         rb.type(usuario.getMimeType());
         rb.header("Content-disposition", "inline; filename=" + usuario.getNombreArchivo());
         return rb.build();
@@ -207,7 +211,7 @@ public class UsuarioEndpoint {
                 if (item.getContentType() != null) {
                     usuario.setNombreArchivo(item.getName());
                     usuario.setMimeType(item.getContentType());
-                    this.writeToFile(item.openStream(), FILE_PATH + item.getName());
+                    //this.writeToFile(item.openStream(), FILE_PATH + item.getName());
                     usuario.setPic(readFully(item.openStream(), 1000000, true));
                 }
             }
@@ -218,7 +222,7 @@ public class UsuarioEndpoint {
                     .entity(new ErrorMessageDto(true, 500, "Hubo un error al cargar el archivo")).build();
         }
 
-        return Response.ok(new ErrorMessageDto(true, 200, "Archivo subido con Èxito")).build();
+        return Response.ok(new ErrorMessageDto(true, 200, "Archivo subido con √©xito")).build();
     }
     
     @POST
@@ -231,7 +235,7 @@ public class UsuarioEndpoint {
         Usuario usuario = this.usuarioDao.findByNameAndPassword(idUsuario, password);
         if (usuario == null)
             return Response.status(Response.Status.UNAUTHORIZED).entity(
-                    new ErrorMessageDto(false, 401, "Usuario o clave inv·lidos")
+                    new ErrorMessageDto(false, 401, "Usuario o clave inv√°lidos")
             ).build();
 
         JsonObjectBuilder json = Json.createObjectBuilder();
