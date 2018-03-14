@@ -34,6 +34,7 @@ public class Estudiante implements Serializable {
         this.nombre = nombre;
         this.direccion = direccion;
     }
+
     
     public Integer getId() {
         return id;

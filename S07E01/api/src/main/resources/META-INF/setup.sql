@@ -42,11 +42,11 @@ insert into estudiante values(3, '3333', 'Jorge Lam', 'Guatemala')
 insert into estudiante values(4, '4444', 'Berny Torres', 'Guatemala')
 insert into estudiante values(5, '5555', 'Alejandro Rigalt', 'Guatemala')
 
-insert into ASIGNACION_ESTUDIANTE (id, id_estudiante, id_curso, zona, examen_final, nota_final) values(1, 1, 2, 0, 0, 0)
-insert into ASIGNACION_ESTUDIANTE (id, id_estudiante, id_curso, zona, examen_final, nota_final) values(2, 2, 2, 0, 0, 0)
-insert into ASIGNACION_ESTUDIANTE (id, id_estudiante, id_curso, zona, examen_final, nota_final) values(3, 3, 2, 0, 0, 0)
-insert into ASIGNACION_ESTUDIANTE (id, id_estudiante, id_curso, zona, examen_final, nota_final) values(4, 4, 2, 0, 0, 0)
-insert into ASIGNACION_ESTUDIANTE (id, id_estudiante, id_curso, zona, examen_final, nota_final) values(5, 5, 2, 0, 0, 0)
+insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 1, 2, 0, 0, 0)
+insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 2, 2, 0, 0, 0)
+insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 3, 2, 0, 0, 0)
+insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 4, 2, 0, 0, 0)
+insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 5, 2, 0, 0, 0)
 
 insert into PROFESOR values(1, '1111', 'Nahum Alarcón', 'Guatemala')
 

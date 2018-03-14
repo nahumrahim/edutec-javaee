@@ -26,7 +26,6 @@ export class EditUsuarioComponent {
     	this.entity = {
     		 nombre: "",
     		 email: "",
-    		 telefono: "",
     		 id: null,
              telefono: "0",
     		 rol: {

@@ -4,12 +4,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,17 +16,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="ASIGNACION_ESTUDIANTE")
+@IdClass(AsignacionEstudiantePK.class)
 public class AsignacionEstudiante implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asesGen")
-    @SequenceGenerator(name="asesGen", sequenceName = "ases_seq", initialValue = 10)
-    private Integer id;
-    
     @JoinColumn(name = "ID_ESTUDIANTE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estudiante estudiante;
 
+    @Id
     @JoinColumn(name = "ID_CURSO", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Curso curso;
@@ -45,7 +41,6 @@ public class AsignacionEstudiante implements Serializable {
     }
 
     public AsignacionEstudiante(Integer id, Float zona, Float examenFinal, Float notaFinal, Estudiante estudiante, Curso curso) {
-        this.id = id;
         this.zona = zona;
         this.examenFinal = examenFinal;
         this.notaFinal = notaFinal;
@@ -92,14 +87,5 @@ public class AsignacionEstudiante implements Serializable {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
 }
