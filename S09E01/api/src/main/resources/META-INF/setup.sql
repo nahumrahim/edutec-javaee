@@ -8,7 +8,6 @@ insert into usuario values(2, 'yesteban', 'yesteban09@gmail.com', '1907-05-25', 
 insert into usuario values(3, 'jlpazos', 'leokirap014@gmail.com', '1994-01-07', null, 'Jorge Leonel Lam Pazos', null, 'holamundo1.', null, '534563', 2)
 insert into usuario values(4, 'mmutzus', 'elmutzus@gmail.com', '1987-01-02', null, 'Manuel Mutzus', null, 'holamundo1.', null, '3456456', 1)
 insert into usuario values(5, 'arigalt', 'arigalt@gmail.com', '1978-02-08', null, 'Alejandro Rigalt', null, 'holamundo1.', null, '57456567', 2)
-insert into usuario values(6, 'btorres', 'bernyt0rr3s@gmail.com', '1900-01-01', null, 'Bern Torres', null, 'holamundo1.', null, '4567567', 2)
 
 insert into PARAMETRO_SISTEMA VALUES (1, 'MODO_DEBUG', '0')
 insert into PARAMETRO_SISTEMA VALUES (2, 'NUMERO_DECIMALES', '2')
@@ -50,4 +49,4 @@ insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, 
 
 insert into PROFESOR values(1, '1111', 'Nahum Alarcón', 'Guatemala')
 
-insert into ASIGNACION_PROFESOR (id, id_profesor, id_curso) values (1, 1, 2)
+insert into ASIGNACION_PROFESOR (id_profesor, id_curso) values (1, 2)

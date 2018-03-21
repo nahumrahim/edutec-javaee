@@ -45,6 +45,12 @@ public class Curso implements Serializable {
         this.ciclo = ciclo;
         this.salon = salon;
     }
+
+    public Curso(Integer id, String codigo, String direccion) {
+        this.id = id;
+        this.codigo = codigo;
+        this.direccion = direccion;
+    }
     
     public Integer getId() {
         return id;

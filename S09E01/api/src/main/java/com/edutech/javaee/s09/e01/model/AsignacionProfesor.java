@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  * @author nahum
  */
-@Entity
+/*@Entity
 @Table(name="ASIGNACION_PROFESOR")
 public class AsignacionProfesor implements Serializable {
     
@@ -67,3 +67,4 @@ public class AsignacionProfesor implements Serializable {
 
 
 }
+*/

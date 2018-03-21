@@ -21,10 +21,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="DEPARTAMENTO")
 @NamedQueries({
-    // Distinct
-    @NamedQuery(name="Departamento.findAll", query="Select DISTINCT d from Departamento d LEFT JOIN FETCH d.municipios"),
-    //@NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),
-    //JOIN FETCH
+    /*********************/
+    // Demo con eager fetching sin joins
+    @NamedQuery(name="Departamento.findAll", query="Select d from Departamento d"),    
+    //Demo con LAZY fetching con y sin joins
+    //@NamedQuery(name="Departamento.findAll", query="Select DISTINCT d from Departamento d LEFT JOIN FETCH d.municipios"),
+    /*********************/
     @NamedQuery(name="Departamento.findById", query="Select d from Departamento d LEFT JOIN FETCH d.municipios WHERE d.id = :idDepartamento")
 })
 public class Departamento implements Serializable {
@@ -37,7 +39,8 @@ public class Departamento implements Serializable {
     private String codigo;
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY)
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.EAGER)
     List<Municipio> municipios;
     
     public Departamento() {

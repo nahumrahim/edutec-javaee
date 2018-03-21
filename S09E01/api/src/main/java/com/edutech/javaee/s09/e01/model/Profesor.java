@@ -1,10 +1,15 @@
 package com.edutech.javaee.s09.e01.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,12 +24,23 @@ public class Profesor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profesorGen")
     @SequenceGenerator(name="profesorGen", sequenceName = "profesor_seq", initialValue = 10)
-    private Integer id;
-    
+    private Integer id;    
     private String carnet;
     private String nombre;
     private String direccion;
 
+    @ManyToMany (fetch = FetchType.LAZY)
+    @JoinTable(
+        name="ASIGNACION_PROFESOR", 
+        joinColumns = { 
+            @JoinColumn(name="ID_PROFESOR", referencedColumnName = "ID")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name="ID_CURSO", referencedColumnName = "ID") 
+        }
+    )
+    List<Curso> cursos;
+    
     public Profesor() {
     }
 
@@ -34,6 +50,7 @@ public class Profesor implements Serializable {
         this.nombre = nombre;
         this.direccion = direccion;
     }
+
     
     public Integer getId() {
         return id;
@@ -65,6 +82,14 @@ public class Profesor implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
     
 }
