@@ -42,6 +42,7 @@ public class DepartamentoEndpoint {
     public List<Departamento> findAll() {
         List<Departamento> deptosDto;
         deptosDto = new ArrayList<>();
+        //deptosDto = this.dao.findAll();
         this.dao.findAll()
                 .stream()
                 .forEach((Departamento departamento) -> {

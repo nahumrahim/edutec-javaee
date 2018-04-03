@@ -39,8 +39,8 @@ public class Departamento implements Serializable {
     private String codigo;
     private String nombre;
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.LAZY)
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", fetch = FetchType.EAGER)
     List<Municipio> municipios;
     
     public Departamento() {

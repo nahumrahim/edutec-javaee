@@ -17,7 +17,7 @@ public class RestClient {
         Client client = ClientBuilder.newClient();
         List<String> resourceList = new ArrayList<>();
         try {
-            resourceList = client.target("http://localhost:8081/tarjeta/api/validate/" + idCard)
+            resourceList = client.target("http://localhost:8081/tarjeta/api/operaciones/validate/" + idCard)
                     .request(MediaType.APPLICATION_JSON)
                     .get(new GenericType<List<String>>() {
                     });   

@@ -18,6 +18,9 @@ public class ProfesorDao {
     public List<Profesor> findAll() {
         return this.em
                 .createQuery("SELECT r FROM Profesor r LEFT JOIN FETCH r.cursos c LEFT JOIN FETCH c.ciclo LEFT JOIN FETCH c.salon s LEFT JOIN FETCH s.sede", Profesor.class)
+                // Para las implementaciones basadas en Eclipse Link, utilizar Hints
+                .setHint("eclipselink.left-join-fetch", "r.cursos.ciclo")
+                .setHint("eclipselink.left-join-fetch", "r.cursos.salon.sede")
                 .getResultList();            
     }
     public List<Profesor> findAllUnNivel() {

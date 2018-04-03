@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 
 /**
  *
@@ -32,13 +34,17 @@ public class ProfesorEndpoint {
     
     @GET
     @Produces({"application/json"})
-    public List<Profesor> findAll() {
-        return this.profesorDao.findAll();
+    public List<Profesor> findAll(@Context ContainerRequestContext rq) {
+        //if (rq.getSecurityContext().isUserInRole("ADMIN"))
+            return this.profesorDao.findAll();
+        //else
+        //    return new ArrayList<>();
     }
 
     @GET
     @Produces({"application/json"})
-    public List<Profesor> findAllUnNivel() {
+    @Path("fetch-un-nivel")
+    public List<Profesor> fetchUnNivel() {
         List<Profesor> dtoList = new ArrayList<>();
         this.profesorDao.findAllUnNivel().stream().forEach((_profesor) -> {
             Profesor dto = new Profesor(
@@ -55,7 +61,7 @@ public class ProfesorEndpoint {
                    _curso.getDireccion()
                ));
             });
-            dtoList.add(_profesor);
+            dtoList.add(dto);
         });
         return dtoList;
     }

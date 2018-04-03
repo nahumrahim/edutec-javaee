@@ -1,7 +1,7 @@
 
-insert into ROL values (1, 'ADMIN', 'Administrador del Sistema')
-insert into ROL values (2, 'PROFE', 'Profesor')
-insert into ROL values (3, 'ESTUDIANTE', 'Estudiante regular')
+insert into ROL values (1, 'Administrador del Sistema', 'ADMIN')
+insert into ROL values (2, 'Profesor', 'PROFE')
+insert into ROL values (3, 'Estudiante regular', 'ESTUDIANTE')
 
 insert into usuario values(1, 'admin', 'admin@admon.com', '1981-07-23', null, 'Administrador del Sistema', null, 'holamundo1.', null, '1234124', 1)
 insert into usuario values(2, 'yesteban', 'yesteban09@gmail.com', '1907-05-25', null, 'Yoli Esteban', null, 'holamundo1.', null, '3423423', 2)
@@ -47,6 +47,6 @@ insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, 
 insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 4, 2, 0, 0, 0)
 insert into ASIGNACION_ESTUDIANTE (id_estudiante, id_curso, zona, examen_final, nota_final) values( 5, 2, 0, 0, 0)
 
-insert into PROFESOR values(1, '1111', 'Nahum Alarcón', 'Guatemala')
+insert into PROFESOR values(1, '1111', 'Guatemala', 'Nahum Alarcón')
 
 insert into ASIGNACION_PROFESOR (id_profesor, id_curso) values (1, 2)

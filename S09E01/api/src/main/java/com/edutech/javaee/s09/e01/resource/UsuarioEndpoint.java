@@ -189,6 +189,7 @@ public class UsuarioEndpoint {
         // Con base de datos
         Response.ResponseBuilder rb = Response.ok( usuario.getPic() );
         rb.type(usuario.getMimeType());
+        //rb.header("Content-disposition", "attachment; filename=" + usuario.getNombreArchivo());
         rb.header("Content-disposition", "inline; filename=" + usuario.getNombreArchivo());
         return rb.build();
     }

@@ -1,6 +1,7 @@
 package com.edutech.javaee.s03.e02.resources;
 
 import com.edutech.javaee.s03.e02.model.Tarjeta;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,6 +50,9 @@ public class TarjetaEndpoint {
     @GET
     @Path("validate/{number}")
     public Response validate(@PathParam("number") Long id) {
-        return Response.ok().build();
+        List<String> lista = new ArrayList<>();
+        lista.add("Operacion Exitosa");
+        lista.add("El saldo de su tarjeta es: 2045");
+        return Response.ok(lista).build();
     }
 }

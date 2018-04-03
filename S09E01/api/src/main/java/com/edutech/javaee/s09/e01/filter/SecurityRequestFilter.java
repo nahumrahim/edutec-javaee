@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.security.Principal;
 import javax.annotation.Priority;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -25,11 +23,11 @@ import javax.ws.rs.core.UriInfo;
  * @author nahum
  */
 @Provider
-@Priority(Priorities.AUTHORIZATION)
+@Priority(Priorities.AUTHENTICATION)
 public class SecurityRequestFilter implements ContainerRequestFilter, ContainerResponseFilter {
     
-    @PersistenceContext(unitName = "primary")
-    EntityManager em;
+    //@PersistenceContext(unitName = "primary")
+    //EntityManager em;
  
     @Context
     UriInfo uriInfo;
@@ -42,7 +40,7 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
         System.out.println("JAXRS Filter dice: Estoy filtrando ;)");
         
         boolean isPublicRequest = false;
-        boolean debug = true;
+        boolean debug = false;
         String[] publicPaths = new String[] {
             "usuarios/login",
             "departamentos",
@@ -64,7 +62,9 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
         if (userName != null) {
             final Usuario user = usuarioDao.findByName(userName);
             if (user != null) {
-                //final SecurityContext securityContext = requestContext.getSecurityContext();
+                // Validar expiracion del token
+                
+                final SecurityContext securityContext = requestContext.getSecurityContext();
                 requestContext.setSecurityContext(new SecurityContext() {
                     @Override
                     public Principal getUserPrincipal() {

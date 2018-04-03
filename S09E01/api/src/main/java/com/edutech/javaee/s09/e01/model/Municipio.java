@@ -10,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -18,6 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name="MUNICIPIO")
+@XmlRootElement
 public class Municipio implements Serializable {
     
     @Id
@@ -60,6 +63,7 @@ public class Municipio implements Serializable {
     }
 
     @XmlTransient
+    //@JsonbTransient   // Para Glassfish 5 o EE8
     public Departamento getDepartamento() {
         return departamento;
     }
