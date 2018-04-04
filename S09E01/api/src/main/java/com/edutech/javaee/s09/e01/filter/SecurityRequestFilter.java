@@ -40,7 +40,8 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
         System.out.println("JAXRS Filter dice: Estoy filtrando ;)");
         
         boolean isPublicRequest = false;
-        boolean debug = false;
+        boolean debug = true;
+        //requestContext.getMethod()
         String[] publicPaths = new String[] {
             "usuarios/login",
             "departamentos",
@@ -63,7 +64,6 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
             final Usuario user = usuarioDao.findByName(userName);
             if (user != null) {
                 // Validar expiracion del token
-                
                 final SecurityContext securityContext = requestContext.getSecurityContext();
                 requestContext.setSecurityContext(new SecurityContext() {
                     @Override

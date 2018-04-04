@@ -1,5 +1,6 @@
 package com.edutech.javaee.s03.e02.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +13,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TARJETA")
-public class Tarjeta {
+public class Tarjeta implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String numero;
     private String descripcion;
+    private Float disponible;
+    private String numero;
+    private Float saldo;
 
     public Tarjeta() {
     }
@@ -51,6 +54,22 @@ public class Tarjeta {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Float saldo) {
+        this.saldo = saldo;
+    }
+
+    public Float getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Float disponible) {
+        this.disponible = disponible;
     }
        
 }

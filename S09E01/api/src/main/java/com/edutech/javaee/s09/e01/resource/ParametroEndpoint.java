@@ -4,8 +4,6 @@ import com.edutech.javaee.s09.e01.dao.ParametroSistemaDao;
 import com.edutech.javaee.s09.e01.dto.ErrorMessageDto;
 import com.edutech.javaee.s09.e01.dto.ParametroDto;
 import com.edutech.javaee.s09.e01.model.ParametroSistema;
-import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -15,13 +13,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 
 /**
  *
  * @author nahum
  */
-//@Stateless
+@Stateless
 @Path("/parametros")
 public class ParametroEndpoint {
     
@@ -30,13 +29,19 @@ public class ParametroEndpoint {
 
     @GET
     @Produces({"application/json"})
-    @RolesAllowed("ADMIN")
-    public List<ParametroSistema> findAll(@Context SecurityContext context) {
-        System.out.println( context.getAuthenticationScheme());
-        System.out.println( context.getUserPrincipal().getName() );
-        System.out.println( context.isUserInRole("ADMIN") );
-        System.out.println( context.isSecure() );
-        return this.dao.findAll();
+    public Response findAll(@Context SecurityContext context) {
+//        System.out.println( context.getAuthenticationScheme());
+//        System.out.println( context.getUserPrincipal().getName() );
+//        System.out.println( context.isUserInRole("ADMIN") );
+//        System.out.println( context.isSecure() );
+        if (context.isUserInRole("ADMIN")) {
+            return Response.ok(this.dao.findAll()).build();
+        }
+        else {
+            return Response.status(Status.FORBIDDEN).entity(
+                new ErrorMessageDto(false, 403, "No tiene privilegios suficientes para este recurso")
+            ).build();
+        }
     }
     
     @GET

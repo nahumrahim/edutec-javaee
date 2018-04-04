@@ -9,8 +9,16 @@
             30
         </session-timeout>
     </session-config>
+    
     <context-param>
         <param-name>resteasy.role.based.security</param-name>
         <param-value>true</param-value>
     </context-param>
+    
+<!--    <login-config>  
+        <auth-method>BASIC</auth-method>  
+        <realm-name>default</realm-name>
+    </login-config>-->
+
+    
 </web-app>

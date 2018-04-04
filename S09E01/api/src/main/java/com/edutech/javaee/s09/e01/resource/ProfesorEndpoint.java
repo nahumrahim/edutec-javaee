@@ -5,19 +5,20 @@ import com.edutech.javaee.s09.e01.model.Curso;
 import com.edutech.javaee.s09.e01.model.Profesor;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 
 /**
  *
  * @author nahum
  */
-@Stateless
+//@Stateless
 @Path("/profesores")
 public class ProfesorEndpoint {
 
@@ -34,11 +35,9 @@ public class ProfesorEndpoint {
     
     @GET
     @Produces({"application/json"})
-    public List<Profesor> findAll(@Context ContainerRequestContext rq) {
-        //if (rq.getSecurityContext().isUserInRole("ADMIN"))
-            return this.profesorDao.findAll();
-        //else
-        //    return new ArrayList<>();
+    @RolesAllowed({"ADMIN", "PROFE"})
+    public List<Profesor> findAll(@Context SecurityContext context) {
+        return this.profesorDao.findAll();
     }
 
     @GET
