@@ -1,7 +1,6 @@
 package com.edutech.javaee.s11.e01.dao;
 
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,7 +28,6 @@ public class GenericDao<T> {
         System.out.println( getClass() );
     }
 
-    @Inject
     public GenericDao(Class<T> entityClass) {
         System.out.println("Constructor con parametro");
         this.entityClass = entityClass;

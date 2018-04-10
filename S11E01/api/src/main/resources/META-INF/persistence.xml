@@ -13,7 +13,8 @@
             <!-- Log -->
             <property name="hibernate.show_sql" value="true" />
             <property name="eclipselink.logging.level" value="FINE"/>
-            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+            <property name="openjpa.Log" value="SQL=Trace" />
+            <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true" />
 
             <!-- Generacion automatica -->
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
@@ -23,6 +24,8 @@
 			<property name="javax.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>
 			<property name="javax.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/>
             <property name="javax.persistence.sql-load-script-source" value="META-INF/setup.sql"/>
+
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
         </properties>
     </persistence-unit>
     
