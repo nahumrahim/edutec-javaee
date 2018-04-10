@@ -1,4 +1,4 @@
-package com.edutech.javaee.s03.e02;
+package com.edutech.javaee.s09.e02;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -1,6 +1,6 @@
-package com.edutech.javaee.s03.e02.resources;
+package com.edutech.javaee.s09.e02.resources;
 
-import com.edutech.javaee.s03.e02.model.Tarjeta;
+import com.edutech.javaee.s09.e02.model.Tarjeta;
 import com.edutech.javaee.s09.e02.dto.PagoTarjetaDto;
 import java.util.ArrayList;
 import java.util.List;

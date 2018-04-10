@@ -1,4 +1,4 @@
-package com.edutech.javaee.s03.e02.model;
+package com.edutech.javaee.s09.e02.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
