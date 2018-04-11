@@ -1,8 +1,10 @@
 package com.edutech.javaee.s11.e01.service;
 
+import com.edutech.javaee.s11.e01.dao.ParametroSistemaDao;
 import com.edutech.javaee.s11.e01.dto.PagoTarjetaDto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -16,6 +18,9 @@ import javax.ws.rs.core.Response;
  */
 public class TarjetaService {
 
+    @Inject
+    ParametroSistemaDao paramDao;
+    
     String tokenRemoto;
     
     public boolean remoteLogin() {
@@ -26,7 +31,7 @@ public class TarjetaService {
         Client client = ClientBuilder.newClient();
         List<String> informacion = new ArrayList<>();
         try {
-            informacion = client.target("http://localhost:8081/tarjeta/api/consultas/validate/" + idCard)
+            informacion = client.target(paramDao.find(4).getValor() + idCard)
                     .request(MediaType.APPLICATION_JSON)
                     .get(new GenericType<List<String>>() {
                     });   
@@ -44,7 +49,7 @@ public class TarjetaService {
         
         PagoTarjetaDto outputDto;
         try {
-            Response response = client.target("http://localhost:8081/tarjeta/api/consultas/pagar")
+            Response response = client.target(paramDao.find(5).getValor())
                     .request(MediaType.APPLICATION_JSON)
                     .post(Entity.entity(inputDto, MediaType.APPLICATION_JSON));
             outputDto = response.readEntity(PagoTarjetaDto.class);

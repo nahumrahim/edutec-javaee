@@ -34,6 +34,9 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
     
     @Inject
     UsuarioDao usuarioDao;
+
+    // Inyectar objetos con jndi definido
+    // @Resource
     
     @Override
     public void filter(final ContainerRequestContext requestContext) throws IOException {
@@ -63,7 +66,11 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
         if (userName != null) {
             final Usuario user = usuarioDao.findByName(userName);
             if (user != null) {
+                
                 // Validar expiracion del token
+                // Extraer signature
+                // Ejecutar algoritmo de signature
+                
                 final SecurityContext securityContext = requestContext.getSecurityContext();
                 requestContext.setSecurityContext(new SecurityContext() {
                     @Override
@@ -98,7 +105,7 @@ public class SecurityRequestFilter implements ContainerRequestFilter, ContainerR
         if (authParts == null || authParts.length < 2 || !authParts[0].equals("Bearer"))
             return null;
         
-        String tokenParts[] = authParts[1].split(":");
+        String tokenParts[] = authParts[1].split("\\.");
         if (tokenParts == null || tokenParts.length < 2)
             return null;
         

@@ -5,13 +5,15 @@ insert into ROL values (3, 'Estudiante regular', 'ESTUDIANTE')
 
 insert into usuario values(1, 'admin', 'admin@admon.com', '1981-07-23', null, 'Administrador del Sistema', null, 'holamundo1.', null, '1234124', 1)
 insert into usuario values(2, 'yesteban', 'yesteban09@gmail.com', '1907-05-25', null, 'Yoli Esteban', null, 'holamundo1.', null, '3423423', 2)
-insert into usuario values(3, 'jlpazos', 'leokirap014@gmail.com', '1994-01-07', null, 'Jorge Leonel Lam Pazos', null, 'holamundo1.', null, '534563', 2)
-insert into usuario values(4, 'mmutzus', 'elmutzus@gmail.com', '1987-01-02', null, 'Manuel Mutzus', null, 'holamundo1.', null, '3456456', 1)
+insert into usuario values(3, 'jlpazos', 'leokirap014@gmail.com', '1994-01-07', null, 'Jorge Leonel Lam Pazos', null, 'holamundo1.', null, '534563', 3)
+insert into usuario values(4, 'mmutzus', 'elmutzus@gmail.com', '1987-01-02', null, 'Manuel Mutzus', null, 'holamundo1.', null, '3456456', 3)
 insert into usuario values(5, 'arigalt', 'arigalt@gmail.com', '1978-02-08', null, 'Alejandro Rigalt', null, 'holamundo1.', null, '57456567', 2)
 
 insert into PARAMETRO_SISTEMA VALUES (1, 'MODO_DEBUG', '0')
 insert into PARAMETRO_SISTEMA VALUES (2, 'NUMERO_DECIMALES', '2')
 insert into PARAMETRO_SISTEMA VALUES (3, 'BANGUAT_TIPOCAMBIO_WSDL', 'https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx?WSDL')
+insert into PARAMETRO_SISTEMA VALUES (4, 'TARJETA_VALIDAR_URL', 'http://localhost:8081/tarjeta/api/consultas/validate/')
+insert into PARAMETRO_SISTEMA VALUES (5, 'TARJETA_PAGAR_URL', 'http://localhost:8081/tarjeta/api/consultas/pagar')
 
 insert into DEPARTAMENTO values (1, 'GUA', 'Guatemala')
 insert into DEPARTAMENTO values (2, 'SAC', 'Sacatepéquez')

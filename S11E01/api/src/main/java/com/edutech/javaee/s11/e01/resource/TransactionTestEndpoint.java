@@ -1,7 +1,9 @@
 package com.edutech.javaee.s11.e01.resource;
 
 import com.edutech.javaee.s11.e01.dao.GenericDao;
+import com.edutech.javaee.s11.e01.dao.MunicipioDao;
 import com.edutech.javaee.s11.e01.model.Division;
+import com.edutech.javaee.s11.e01.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,15 +28,22 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class TransactionTestEndpoint {
     
+    @Inject
     GenericDao<Division> dao;
 
+    @Inject
+    GenericDao<Usuario> usuarioDao;
+    
+    @Inject
+    MunicipioDao muniDao;
+    
     public TransactionTestEndpoint() {
     }
 
-    @Inject
+    /*@Inject
     public TransactionTestEndpoint(GenericDao<Division> dao) {
         this.dao = dao;
-    }
+    }*/
 
     
     @GET
@@ -46,7 +55,7 @@ public class TransactionTestEndpoint {
     @GET
     @Path("error/{code}") 
     public Response getErrorCode(@PathParam ("code") Integer code) {
-        
+        //GenericDao<Division> divdao = new GenericDao<>(Division.class);
         if (code >= 400)
             throw new WebApplicationException("Error Http: " + code, code);
         
@@ -62,7 +71,7 @@ public class TransactionTestEndpoint {
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    private void javaDivision(Integer dividendo, Integer divisor) throws ScriptException {
+    private void javaDivision(Integer dividendo, Integer divisor) throws Exception {
         Division div = new Division(dividendo, divisor, String.valueOf(dividendo/divisor));
         dao.save(div);
         System.out.println("El cociente es: " + div.getCociente());
@@ -76,10 +85,11 @@ public class TransactionTestEndpoint {
         divisiones.add("9/3");
         divisiones.add("7/0");
         divisiones.add("19/5");
-        divisiones.stream().forEach((String division) -> { 
+        
+        divisiones.stream().forEach((String divisionStr) -> { 
             try {
-                javascriptDivision(division);
-                String parts[] = division.split("/");
+                javascriptDivision(divisionStr);
+                String parts[] = divisionStr.split("/");
                 javaDivision(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
             } catch (ScriptException ex) {
                 System.out.println(" -> Hubo un error al ejecutar la division: " + ex.getMessage());

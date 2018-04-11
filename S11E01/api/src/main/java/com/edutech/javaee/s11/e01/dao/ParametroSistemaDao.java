@@ -26,10 +26,12 @@ public class ParametroSistemaDao {
     
     public ParametroSistema find(Integer id) {
         try {
+            // Desencriptar antes de devolver
             return this.em
                     .createQuery("SELECT p FROM ParametroSistema p WHERE p.id = :parametro", ParametroSistema.class)
                     .setParameter("parametro", id)
                     .getSingleResult();
+            
         } catch(NoResultException nre) {
             return null;
         }
@@ -42,6 +44,7 @@ public class ParametroSistemaDao {
     }
 
     public ParametroSistema save(ParametroSistema entity) {
+        // Encriptar valores antes de guardar
         this.em.persist(entity);
         return entity;
     }

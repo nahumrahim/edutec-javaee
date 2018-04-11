@@ -243,7 +243,8 @@ public class UsuarioEndpoint {
         json.add("mensaje", "Login Correcto");
         json.add("usuario", usuario.getCodigo());
         json.add("nombre", usuario.getNombre());
-        json.add("token", "Bearer admin:123456789");
+        // generar token con algoritmo jwt
+        json.add("token", "Bearer admin.123456789");
         return Response.ok(json.build()).build();
     }
 
