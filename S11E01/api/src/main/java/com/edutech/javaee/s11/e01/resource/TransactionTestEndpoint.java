@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class TransactionTestEndpoint {
     
-    @Inject
+    //@Inject
     GenericDao<Division> dao;
 
     @Inject
@@ -40,16 +40,17 @@ public class TransactionTestEndpoint {
     public TransactionTestEndpoint() {
     }
 
-    /*@Inject
+    @Inject
     public TransactionTestEndpoint(GenericDao<Division> dao) {
         this.dao = dao;
-    }*/
+        this.dao.setEntityClass(Division.class);
+    }
 
     
     @GET
     @Produces("application/json")
     public List<Division> findAll() {
-        return dao.findAll(Division.class);
+        return dao.findAll();
     }
     
     @GET

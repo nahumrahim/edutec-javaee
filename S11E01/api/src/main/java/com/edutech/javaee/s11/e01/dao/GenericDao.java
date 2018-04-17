@@ -33,6 +33,14 @@ public class GenericDao<T> {
         this.entityClass = entityClass;
     }
 
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }    
+    
     public T save(T entity) {
         System.out.println("Voy creando el registro de tipo: " + entity.getClass().getSimpleName());
         //System.out.println(entity.toString());
@@ -41,8 +49,7 @@ public class GenericDao<T> {
         return entity;
     }
 
-    public List<T> findAll(Class<T> entityClass) {
-        this.entityClass = entityClass;
+    public List<T> findAll() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(this.entityClass);
         Root<T> rootEntry = cq.from(this.entityClass);
