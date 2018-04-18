@@ -3,6 +3,7 @@ package com.edutech.javaee.s12.e01.resource;
 import java.util.Arrays;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -24,6 +25,12 @@ public class ExampleEndpoint {
     public Response getNamesAsString() {
         String names[] = { "Java", "Scala", "Kotlin" };
         return Response.ok( Arrays.asList(names) ).build();
+    }
+    
+    @GET
+    @Path("suma/{a}/{b}")
+    public String Sumar(@PathParam("a") Integer a, @PathParam("b") Integer b) {
+        return String.valueOf(a + b);
     }
     
 }

@@ -247,6 +247,9 @@ public class UsuarioEndpoint {
         json.add("token", "Bearer admin.123456789");
         System.out.println("Bearer admin.123456789");
         System.out.println(json.toString());
+        
+        // Probar un endpoint seguro
+        
         return Response.ok(json.build()).build();
     }
 

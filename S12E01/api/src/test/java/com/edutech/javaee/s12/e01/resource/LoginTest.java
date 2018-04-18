@@ -48,7 +48,7 @@ public class LoginTest {
 
         Form form = new Form();
         form.param("idUsuario", "mmutzus")
-                .param("password", "helloworld1.");
+            .param("password", "helloworld1.");
 
         Response response = client
                 .target("http://localhost:8081/edutec-javaee/api/usuarios/login")
