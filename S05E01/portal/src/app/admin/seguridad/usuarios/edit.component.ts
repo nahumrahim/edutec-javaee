@@ -28,7 +28,6 @@ export class EditUsuarioComponent {
     		 email: "",
     		 telefono: "",
     		 id: null,
-             telefono: "0",
     		 rol: {
     		 	id: null,
     		 	nombre: "",
