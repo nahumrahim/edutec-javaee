@@ -18,7 +18,7 @@ Requisites:
     - TomEE 7 >
     - Weblogic 12.1.3 >
     - WebSphere Liberty 16 >
-- For building and executind the frontend:
+- For building and executing the frontend:
   - NodeJS 7.9 >
   - NPM 4.6 >
   - Basic knowledge on Angular 2/4/5
