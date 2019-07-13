@@ -1,5 +1,5 @@
 # EduTec javaee
-Contenido para el curso Java EE 7 de EduTec
+Contenido para el curso Java EE 7 que impartí en EduTec
 
 El curso está orientado a usuarios intermedios/avanzados de Java. Se desarrollará una aplicacion Web Empresarial REST utilizando las APIs estándar de Java EE
 
@@ -23,3 +23,4 @@ Requisitos:
   - En la carpeta Portal ejecutar
     - npm install
     - npm start
+
