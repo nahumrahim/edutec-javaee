@@ -1,7 +1,7 @@
 # EduTec javaee
-Content for the lessons on Java EE 7 I gave at Edutech Guatemala
+Content for the lessons on Java EE 7 I gave at Edutec Guatemala
 
-The lessons are oriented to mid/advanced Java users. We will develop a Enterprise Web Application using the standard Java EE APIs
+The lessons are oriented to mid/advanced Java developers. We will develop a Enterprise Web Application using the standard Java EE APIs
 
 Requisites:
 
