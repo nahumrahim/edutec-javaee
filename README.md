@@ -24,3 +24,4 @@ Requisitos:
     - npm install
     - npm start
 
+[Read this document in english](README.en.md)
